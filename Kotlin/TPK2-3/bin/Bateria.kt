@@ -1,9 +1,9 @@
 import java.util.*
 
 class Bateria {
-	var carga: Int = 0
-	var cargaMax: Int = 0
-	var cargaMin: Int = 0
+	private var carga: Int = 0
+	private var cargaMax: Int = 0
+	private var cargaMin: Int = 0
 
 	init {
 		this.carga = 80
