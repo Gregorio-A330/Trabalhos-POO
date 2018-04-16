@@ -1,9 +1,14 @@
+public class Guest extends Usuario {
 
-public class Guest extends Autenticar{
-
-	public Guest(String perfil, String acc, String senha) {
-		super(perfil, acc, senha);
-		
+	public Guest(String login) {
+		super(login);
 	}
 
+	public void despedidaGuest() {
+		System.out.println("Log-off " + super.getLogin());
+	}
+
+	public void descricaoGuest() {
+		System.out.println("Permissões Restritas...");
+	}
 }
