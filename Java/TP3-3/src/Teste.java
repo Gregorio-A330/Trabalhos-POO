@@ -11,10 +11,11 @@ public class Teste {
 		estrela2.mostrar();
 		estrela3.mostrar();
 
-		System.out.println(constelacao.tempConstelacao());
+		
 		constelacao.adicionar(estrela1);
 		System.out.println(constelacao.tempConstelacao());
 		constelacao.adicionar(estrela2);
+		System.out.println(constelacao.tempConstelacao());
 		constelacao.adicionar(estrela3);
 
 		// Cálculo da soma da temperatura de uma constelação
