@@ -1,5 +1,6 @@
 
 public enum Categoria {
 
-	CIENCIA,LITERATURA,FILOSOFIA;
+	CIENCIA, LITERATURA, FILOSOFIA;
+	
 }

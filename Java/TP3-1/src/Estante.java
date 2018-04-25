@@ -4,38 +4,75 @@ public class Estante {
 
 	private String nome;
 	private Categoria categoria;
-	private ArrayList<Livro> livro;
-	
+	private ArrayList<Livro> livros;
+
 	public Estante(String nome, Categoria categoria) {
-		this.nome=nome;
-		this.categoria=categoria;
-		this.livro = new ArrayList<Livro>();
+		this.nome = nome;
+		this.categoria = categoria;
+		this.livros = new ArrayList<Livro>();
 	}
-	
-	public String getNomeEstante() {
+
+	public String getNome() {
 		return nome;
 	}
-	
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
-	
-	public void addLivro(Livro l) {
-		if (l != null)
-			livro.add(l);
+
+	public ArrayList<Livro> getLivros() {
+		return livros;
 	}
-	
+
+	public void inserirLivro(Livro l) {
+		livros.add(l);
+	}
+
 	public void removerLivro(Livro l) {
-		if (livro.remove(l))
-			System.out.println(l.getNomeLivro() + " removido");
-		else
-			System.out.println("Livro não encontrado");
+		livros.remove(l);
 	}
 	
-	public void listarTodosLivros() {
-		for(Livro l : livro) {
-			l.mostraLivro();
+	public boolean removerLivroNome (String nomeLivro) {
+		for(Livro l : livros) {
+			if(l.getNome().equalsIgnoreCase(nomeLivro)) {
+				livros.remove(l);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void mostrarEstante() {
+		System.out.println("Estante: " + getNome());
+		System.out.println("Categoria: " + getCategoria());
+	}
+
+	public void listarLivros() {
+		for (Livro l : livros) {
+			l.mostrarInfoLivro();
 		}
 	}
-		
+
+	public void listarAutores() {
+		for (Livro l : livros)
+			l.getAutor();
+	}
+
+	public int getQtde() {
+		return livros.size();
+	}
+
+	public boolean isVazia() {
+		return livros.size() == 0;
+	}
+
+	public boolean pesquisarLivro(String nomeLivro) {
+		for (Livro l : livros) {
+			if (l.getNome().equalsIgnoreCase(nomeLivro)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

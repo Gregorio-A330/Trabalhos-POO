@@ -7,80 +7,135 @@ public class Biblioteca {
 
 	public Biblioteca(String nome) {
 		this.nome = nome;
-		this.estante = new ArrayList<Estante>();
+		this.estante = new ArrayList<>();
 	}
 
-	public String getNomeBiblioteca() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void addEstante(Estante e) {
-		if (e != null)
-			estante.add(e);
-	}
-
-	public void removerEstante(Estante e) {
-		if (estante.remove(e))
-			System.out.println(e.getNomeEstante() + " removido");
-		else
-			System.out.println("Estante não encontrada");
-	}
-
-	public ArrayList<Estante> mostrarEstantes() {
+	public ArrayList<Estante> getEstante() {
 		return estante;
 	}
 
-	public void listarTodasEstantes() {
-		ArrayList<Livro> l;
-		int cont = 0;
-		for (Estante e : estante) {
-			l = e.mostraLivro();
-			for (int i = 0; i < e.size(); i++) {
-				if (l.get(i) != null)
-					System.out.println("Nome: " + l.getNomeLivro() + " Autor: " + l.getAutor());
-			}
-		}
+	public void inserirEstante(Estante e) {
+		estante.add(e);
 	}
 
-	public int contarLivroCiencia() {
-		int cont = 0;
-		for (Estante e : estante) {
-			if (e.getCategoria() == Categoria.CIENCIA) {
-				for (int i = 0; i < estante.size(); i++) {
-					cont++;
-				}
-			}
-		}
-		return cont;
-	}
-
-	public ArrayList<Livro> listarLivroFilosofia() {
-		ArrayList<Livro> livroFilosofia;
+	public ArrayList<Livro> listarFilosofia() {
+		ArrayList<Livro> livroFilo = new ArrayList<>();
 		for (Estante e : estante) {
 			if (e.getCategoria() == Categoria.FILOSOFIA) {
 				for (int i = 0; i < estante.size(); i++) {
-					if (e.listarTodosLivros() != null) {
-						livroFilosofia.get(i) = e.listarTodosLivros();
-					}
+					if (estante.get(i).getLivros() != null)
+						livroFilo.addAll(estante.get(i).getLivros());
 				}
-			}
-
+			} else
+				System.out.println("Categoria vazia...");
 		}
-		return livroFilosofia;
+		return livroFilo;
 	}
 
-	public ArrayList<String> listarAutor(Categoria cat) {
-		ArrayList<String> autor = new ArrayList<String>();
-		ArrayList<Livro> l;
+	public ArrayList<Livro> listarCiencia() {
+		ArrayList<Livro> livroCiencia = new ArrayList<>();
 		for (Estante e : estante) {
-			if (es.getCatEstante() == cat) {
-				l = e.mostrarLivros();
-				for (int i = 0; i < e.size(); i++) {
-					autor.add(l.get(i));
+			if (e.getCategoria() == Categoria.CIENCIA) {
+				for (int i = 0; i < estante.size(); i++) {
+					if (estante.get(i).getLivros() != null)
+						livroCiencia.addAll(estante.get(i).getLivros());
 				}
+			} else
+				System.out.println("Categoria vazia...");
+		}
+		return livroCiencia;
+	}
+
+	public ArrayList<Livro> listarLiteratura() {
+		ArrayList<Livro> livroLiteratura = new ArrayList<>();
+		for (Estante e : estante) {
+			if (e.getCategoria() == Categoria.LITERATURA) {
+				for (int i = 0; i < estante.size(); i++) {
+					if (estante.get(i).getLivros() != null) {
+						livroLiteratura.addAll(estante.get(i).getLivros());
+					}
+				}
+			} else
+				System.out.println("Categoria vazia...");
+		}
+		return livroLiteratura;
+	}
+
+	public ArrayList<String> listarAutores(Categoria cat) {
+		ArrayList<String> autores = new ArrayList<>();
+		ArrayList<Livro> livroAux = new ArrayList<>();
+		for (Estante e : estante) {
+			for (int i = 0; i < estante.size(); i++) {
+				autores.add(livroAux.get(i).getAutor());
 			}
 		}
-		return autor;
+		return autores;
+	}
+
+	public int qtdeLivros() {
+		int qtdLivros = 0;
+		for (Estante e : estante) {
+			for (int i = 0; i < estante.size(); i++)
+				qtdLivros++;
+		}
+		return qtdLivros;
+	}
+
+	public void listarEstante() {
+		for (Estante e : estante) {
+			e.mostrarEstante();
+		}
+	}
+
+	public boolean pesquisarEstante(String nomeEstante) {
+		for (Estante e : estante) {
+			if (e.getNome().equalsIgnoreCase(nomeEstante)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void listarTodos() {
+		for (Estante e : estante) {
+			e.listarLivros();
+		}
+	}
+
+	public int getQtde() {
+		return estante.size();
+	}
+
+	public boolean removerEstante(String nomeEstante) {
+		for (Estante e : estante) {
+			if (e.getNome().equalsIgnoreCase(nomeEstante) && e.isVazia()) {
+				estante.remove(e);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ArrayList<Estante> pesquisarEstanteIndice(String nomeEstante) {
+		for (int i = 0; i <= estante.size(); i++) {
+			if (estante.get(i).getNome() == nomeEstante)
+				return estante;
+		}
+		return null;
+	}
+
+	public void removeEstante(Estante e) {
+		for (int i = 0; i <= estante.size(); i++) {
+			if (estante.get(i) == e) {
+				estante.remove(i);
+				System.out.println("Estante removida...");
+			} else
+				System.out.println("Estante não encontrada...");
+		}
 	}
 
 }
